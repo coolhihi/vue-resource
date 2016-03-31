@@ -7,9 +7,9 @@ var _ = require('../util');
 module.exports = {
 
     request: function (request) {
-
+        
         request.method = request.method.toUpperCase();
-        request.headers = _.extend({}, _.http.headers.common,
+        request.headers = _.extend({}, request.url.match(/^(https?:)?\//) ? [] : _.http.headers.common,
             !request.crossOrigin ? _.http.headers.custom : {},
             _.http.headers[request.method.toLowerCase()],
             request.headers
